@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZULKARNAIN - Marine Investment & Conservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-sunset: #1a0e0a;
+            --bg-section: #221511;
+            --text-primary: #ffffff;
+            --text-secondary: #d4a574;
+            --accent-orange: #ff6b35;
+            --accent-gold: #ffa726;
+            --border: rgba(255, 138, 101, 0.15);
+            --gradient-sunset: linear-gradient(135deg, #ff6b35 0%, #ff8a65 50%, #ffa726 100%);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg-sunset);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Custom Cursor */
+        body {
+            cursor: none;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-orange);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 14, 10, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 14, 10, 0.95);
+            box-shadow: 0 10px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-orange);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-orange);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 14, 10, 0.7), rgba(26, 14, 10, 0.9));
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, var(--accent-orange) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+            box-shadow: 0 0 15px var(--accent-orange);
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        .wave-elegant {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 2;
+        }
+
+        .wave-elegant svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sun/Moon element */
+        .sun {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffa726 0%, #ff8a65 50%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+            box-shadow: 0 0 80px rgba(255, 167, 38, 0.6);
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1000px;
+            padding: 0 5%;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(60px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #ffa726 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 167, 38, 0.3);
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-sunset);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffa726 0%, #ff6b35 100%);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .cta-secondary::before {
+            background: var(--accent-orange);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, transparent, var(--accent-orange));
+            margin: 0 auto 10px;
+        }
+
+        .scroll-indicator p {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffa726 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        /* Thesis Section */
+        #thesis {
+            background: var(--bg-section);
+        }
+
+        .thesis-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .thesis-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .thesis-text::before {
+            content: '"';
+            font-size: 6rem;
+            color: var(--accent-orange);
+            opacity: 0.3;
+            position: absolute;
+            top: -40px;
+            left: -20px;
+        }
+
+        .thesis-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .about-image-container {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .about-image-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-orange);
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .wave-animation {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                transparent 70%);
+            animation: waveShine 3s ease-in-out infinite;
+        }
+
+        @keyframes waveShine {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(0) translateY(-20px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* Services Section */
+        #services {
+            background: var(--bg-section);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 107, 53, 0.05);
+            padding: 3.5rem 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-sunset);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(255, 107, 53, 0.3);
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: grayscale(100%) brightness(0.8);
+            transition: filter 0.4s;
+        }
+
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-card:hover .service-icon {
+            filter: grayscale(0%) brightness(1.2);
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            background: rgba(255, 107, 53, 0.05);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .portfolio-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--accent-orange);
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        .portfolio-card:hover::after {
+            opacity: 1;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .portfolio-info {
+            padding: 2.5rem;
+        }
+
+        .portfolio-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .portfolio-card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-section);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 107, 53, 0.05);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(255, 107, 53, 0.3);
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .contact-card a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-sunset);
+            padding: 4rem 5%;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .thesis-text { font-size: 1.8rem; }
+            nav ul { display: none; }
+            .cta-group { flex-direction: column; }
+            section { padding: 5rem 5%; }
+            .cursor { display: none; }
+            .sun { width: 80px; height: 80px; top: 10%; right: 5%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">ZULKARNAIN</div>
+            <ul>
+                <li><a href="#thesis">Thesis</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <!-- Particles -->
+        <script>
+            for(let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                document.querySelector('.hero').appendChild(particle);
+            }
+        </script>
+        
+        <!-- Wave -->
+        <div class="wave-elegant">
+            <svg viewBox="0 0 1200 150" preserveAspectRatio="none">
+                <path d="M0,80 Q300,50 600,80 T1200,80 L1200,150 L0,150 Z" fill="rgba(255, 107, 53, 0.15)"/>
+                <path d="M0,100 Q300,70 600,100 T1200,100 L1200,150 L0,150 Z" fill="rgba(255, 167, 38, 0.1)"/>
+            </svg>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Marine Investment<br>& Conservation</h1>
+            <p class="hero-subtitle">Long-term sustainable maritime ventures</p>
+            <div class="cta-group">
+                <a href="#contact" class="cta-button">Get Started</a>
+                <a href="#portfolio" class="cta-button cta-secondary">View Portfolio</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span></span>
+            <p>Scroll</p>
+        </div>
+    </section>
+
+    <!-- Thesis Section -->
+    <section id="thesis">
+        <div class="section-container">
+            <div class="thesis-content">
+                <p class="section-number">— Our Thesis</p>
+                <h2>Investment Philosophy</h2>
+                <p class="thesis-text">Sustainable marine tourism and conservation-focused investments represent the next frontier of economic growth in Southeast Asia</p>
+                <p class="thesis-description">Based in Anambas Islands, Kepulauan Riau, we make long-term investments in maritime ventures and coastal development projects that prioritize environmental sustainability and deliver exceptional returns.</p>
+                <p class="thesis-description">As a private investment office, we focus on building lasting partnerships with entrepreneurs and organizations committed to preserving our ocean ecosystems while generating sustainable growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-image-container">
+                    <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80')">
+                        <div class="wave-animation"></div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <p class="section-number">— About</p>
+                    <h2>Zulkarnain</h2>
+                    <p>With over <span class="highlight">a decade of expertise</span> in marine investment and conservation, I specialize in identifying high-value maritime opportunities that deliver sustainable returns while preserving ocean ecosystems.</p>
+                    <p>My approach combines deep industry knowledge with a commitment to environmental stewardship, creating lasting value for investors and coastal communities alike.</p>
+                    <p>Through strategic partnerships and innovative investment models, we're shaping the future of sustainable marine development in Southeast Asia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-container">
+            <p class="section-number">— Services</p>
+            <h2>What We Offer</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sunset Ocean">
+                    </div>
+                    <h3>Marine Tourism Development</h3>
+                    <p>Strategic investment and development of sustainable marine tourism destinations that balance economic growth with environmental conservation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sunset Boat">
+                    </div>
+                    <h3>Conservation Finance</h3>
+                    <p>Structured financing solutions for marine conservation projects, creating sustainable funding models for ecosystem protection and restoration.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Sunset Waves">
+                    </div>
+                    <h3>Coastal Infrastructure</h3>
+                    <p>Development of resilient coastal infrastructure that supports local economies while protecting against climate change impacts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-container">
+            <p class="section-number">— Portfolio</p>
+            <h2>Recent Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80')"></div>
+                    <div class="portfolio-info">
+                        <p class="portfolio-label">Marine Tourism</p>
+                        <h3>Anambas Eco-Resort</h3>
+                        <p>A sustainable luxury resort development in the Anambas Islands, featuring zero-waste operations and community-based marine conservation programs.</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+                    <div class="portfolio-info">
+                        <p class="portfolio-label">Conservation</p>
+                        <h3>Coral Restoration Initiative</h3>
+                        <p>Large-scale coral reef restoration project using innovative techniques to accelerate growth and enhance biodiversity in degraded marine ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-container">
+            <p class="section-number">— Contact</p>
+            <h2>Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:yuhuuii01@gmail.com">yuhuuii01@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone / WhatsApp</h3>
+                    <p><a href="tel:+6282283119257">+62 822 8311 9257</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Anambas Islands, Kepulauan Riau, Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">ZULKARNAIN</div>
+            <p>&copy; 2023 Zulkarnain Marine Investment & Conservation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
